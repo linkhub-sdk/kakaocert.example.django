@@ -13,7 +13,7 @@ kakaocertService.IPRestrictOnOff = settings.IPRestrictOnOff
 
 def reqeustESignhandler(request):
     """
-    간편 전자서명 인증을 요청합니다.
+    간편 전자서명을 요청합니다.
     """
     try:
 
@@ -178,7 +178,7 @@ def getVerifyAuthResulthandler(request):
 
 def reqeustCMShandler(request):
     """
-    자동이체 출금동의 인증을 요청합니다.
+    자동이체 출금동의 전자서명을 요청합니다.
     - 해당 서비스는 전자서명을 하는 당사자와 출금계좌의 예금주가 동일한 경우에만 사용이 가능합니다.
     - 전자서명 당사자와 출금계좌의 예금주가 동일인임을 체크하는 의무는 이용기관에 있습니다.
     - 금융결제원에 증빙자료(전자서명 데이터) 제출은 이용기관 측 에서 진행해야 합니다.
