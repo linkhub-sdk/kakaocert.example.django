@@ -1,2 +1,2 @@
 kakaocert==1.0.0
-django==1.11.28
+django==1.11.29
