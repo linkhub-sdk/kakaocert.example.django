@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block contents %}
+    <div id="content">
+        <p class="heading1">서명 검증</p>
+        <br/>
+        <fieldset class="fieldset1">
+            <legend>{{ request.path }}</legend>
+            <ul>
+              <li>receiptID (접수 아이디) : {{ response.receiptId }}</li>
+              <li>signedData (전자서명 데이터 전문) : {{ response.signedData }}</li>
+            </ul>
+        </fieldset>
+    </div>
+{% endblock contents %}

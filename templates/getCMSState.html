@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block contents %}
     <div id="content">
-        <p class="heading1">간편 전자서명 결과정보 확인</p>
+        <p class="heading1">자동의체 출금동의 서명상태 확인</p>
         <br/>
         <fieldset class="fieldset1">
             <legend>{{ request.path }}</legend>
@@ -13,20 +13,20 @@
               <li>regDT (등록일시) : {{ response.regDT }}</li>
               <li>expires_in (인증요청 만료시간(초)) : {{ response.expires_in }}</li>
               <li>callCenterNum (고객센터 번호) : {{ response.callCenterNum }}</li>
-              <li>token (토큰 원문) : {{ response.token }}</li>
-              <li>allowSimpleRegistYN (은행계좌 실명확인 생략여부) : {{ response.allowSimpleRegistYN }}</li>
+              <li>allowSimpleRegistYN (은행계좌 실명확인 생략여부	) : {{ response.allowSimpleRegistYN }}</li>
               <li>verifyNameYN (수신자 실명확인 여부) : {{ response.verifyNameYN }}</li>
               <li>payload (payload) : {{ response.payload }}</li>
               <li>requestDT (카카오 인증서버 등록일시) : {{ response.requestDT }}</li>
               <li>expireDT (인증요청 만료일시) : {{ response.expireDT }}</li>
               <li>tmstitle (인증요청 메시지 제목) : {{ response.tmstitle }}</li>
               <li>tmsmessage (인증요청 메시지 부가내용) : {{ response.tmsmessage }}</li>
-              <li>signedData (전자서명 데이터 전문) : {{ response.signedData }}</li>
+
               <li>subClientName (별칭) : {{ response.subClientName }}</li>
               <li>subClientCode (별칭코드) : {{ response.subClientCode }}</li>
               <li>viewDT (수신자 카카오톡 인증메시지 확인일시) : {{ response.viewDT }}</li>
-              <li>completeDT (수신자 카카오톡 전자서명 완료일시) : {{ response.completeDT }}</li>
+              <li>completeDT (수신자 카카오톡 전자서명 완료일시	) : {{ response.completeDT }}</li>
               <li>verifyDT (전자서명 검증일시) : {{ response.verifyDT }}</li>
+
             </ul>
         </fieldset>
     </div>

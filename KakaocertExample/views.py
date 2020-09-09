@@ -13,14 +13,14 @@ kakaocertService.IPRestrictOnOff = settings.IPRestrictOnOff
 
 def reqeustESignhandler(request):
     """
-    간편 전자서명을 요청합니다.
+    전자서명을 요청합니다.
     """
     try:
 
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
         clientCode = '020040000001'
 
-        # 간편 전자서명 요청정보 객체
+        # 전자서명 요청정보 객체
         requestObj = RequestESign(
 
             # 고객센터 전화번호, 카카오톡 인증메시지 중 "고객센터" 항목에 표시
@@ -30,13 +30,13 @@ def reqeustESignhandler(request):
             Expires_in = 60,
 
             # 수신자 생년월일, 형식 : YYYYMMDD
-            ReceiverBirthDay = '19700101',
+            ReceiverBirthDay = '19900108',
 
             # 수신자 휴대폰번호
-            ReceiverHP = '01012341234',
+            ReceiverHP = '01043245117',
 
             # 수신자 성명
-            ReceiverName = '홍길동',
+            ReceiverName = '정요한',
 
             # 별칭코드, 이용기관이 생성한 별칭코드 (파트너 사이트에서 확인가능)
             # 카카오톡 인증메시지 중 "요청기관" 항목에 표시
@@ -65,6 +65,9 @@ def reqeustESignhandler(request):
 
             # PayLoad, 이용기관이 생성한 payload(메모) 값
             PayLoad = 'Payload123',
+
+            # AppToApp 인증여부, true-AppToApp 인증, false-Talk Message 인증
+            isAppUseYN = False,
         )
 
         result = kakaocertService.requestESign(clientCode, requestObj)
@@ -73,24 +76,44 @@ def reqeustESignhandler(request):
     except KakaocertException as KE:
         return render(request, 'exception.html', {'code': KE.code, 'message': KE.message})
 
-def getESignResulthandler(request):
+def getESignStatehandler(request):
     """
-    간편 전자서명 요청결과를 확인합니다.
+    전자서명 서명상태를 확인합니다.
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
         clientCode = '020040000001'
 
-        # 간편 전자서명 요청시 반환받은 접수아이디
-        receiptId = '020050716360800001'
+        # 전자서명 요청시 반환받은 접수아이디
+        receiptId = '020090912183600001'
 
-        response = kakaocertService.getESignResult(clientCode, receiptId)
+        response = kakaocertService.getESignState(clientCode, receiptId)
 
-        return render(request, 'getESignResult.html', {'response': response})
+        return render(request, 'getESignState.html', {'response': response})
     except KakaocertException as KE:
         return render(request, 'exception.html', {'code': KE.code, 'message': KE.message})
 
 
+def verifyESignhandler(request):
+    """
+    전자서명 서명을 검증합니다.
+    """
+    try:
+        # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
+        clientCode = '020040000001'
+
+        # 전자서명 요청시 반환받은 접수아이디
+        receiptId = '020090912183600001'
+
+        # AppToApp 인증시, 앱스킴 성공으로 반환받은 서명값
+        # TalkMessage 인증시 None 기재
+        signature = None
+
+        response = kakaocertService.verifyESign(clientCode, receiptId, signature)
+
+        return render(request, 'responseVerify.html', {'response': response})
+    except KakaocertException as KE:
+        return render(request, 'exception.html', {'code': KE.code, 'message': KE.message})
 
 
 def reqeustVerifyAuthhandler(request):
@@ -114,13 +137,13 @@ def reqeustVerifyAuthhandler(request):
             Expires_in = 60,
 
             # 수신자 생년월일, 형식 : YYYYMMDD
-            ReceiverBirthDay = '19700101',
+            ReceiverBirthDay = '19900108',
 
             # 수신자 휴대폰번호
-            ReceiverHP = '01012341234',
+            ReceiverHP = '01043245117',
 
             # 수신자 성명
-            ReceiverName = '홍길동',
+            ReceiverName = '정요한',
 
             # 별칭코드, 이용기관이 생성한 별칭코드 (파트너 사이트에서 확인가능)
             # 카카오톡 인증메시지 중 "요청기관" 항목에 표시
@@ -158,23 +181,39 @@ def reqeustVerifyAuthhandler(request):
         return render(request, 'exception.html', {'code': KE.code, 'message': KE.message})
 
 
-def getVerifyAuthResulthandler(request):
+def getVerifyAuthStatehandler(request):
     """
-    본인인증 요청결과를 확인합니다.
+    본인인증 서명상태를 확인합니다.
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
         clientCode = '020040000001'
 
         # 본인인증 요청시 반환받은 접수아이디
-        receiptId = '020050413311700001'
+        receiptId = '020090912192100001'
 
-        response = kakaocertService.getVerifyAuthResult(clientCode, receiptId)
+        response = kakaocertService.getVerifyAuthState(clientCode, receiptId)
 
-        return render(request, 'getVerifyAuthResult.html', {'response': response})
+        return render(request, 'getVerifyAuthState.html', {'response': response})
     except KakaocertException as KE:
         return render(request, 'exception.html', {'code': KE.code, 'message': KE.message})
 
+def verifyAuthhandler(request):
+    """
+    본인인증 서명을 검증합니다.
+    """
+    try:
+        # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
+        clientCode = '020040000001'
+
+        # 본인인증 요청시 반환받은 접수아이디
+        receiptId = '020090912192100001'
+
+        response = kakaocertService.verifyAuth(clientCode, receiptId)
+
+        return render(request, 'responseVerify.html', {'response': response})
+    except KakaocertException as KE:
+        return render(request, 'exception.html', {'code': KE.code, 'message': KE.message})
 
 def reqeustCMShandler(request):
     """
@@ -198,13 +237,13 @@ def reqeustCMShandler(request):
             Expires_in = 60,
 
             # 수신자 생년월일, 형식 : YYYYMMDD
-            ReceiverBirthDay = '19700101',
+            ReceiverBirthDay = '19900108',
 
             # 수신자 휴대폰번호
-            ReceiverHP = '01012341234',
+            ReceiverHP = '01043245117',
 
             # 수신자 성명
-            ReceiverName = '홍길동',
+            ReceiverName = '정요한',
 
             # 예금주명
             BankAccountName = '예금주명',
@@ -251,19 +290,36 @@ def reqeustCMShandler(request):
         return render(request, 'exception.html', {'code': KE.code, 'message': KE.message})
 
 
-def getCMSResulthandler(request):
+def getCMSStatehandler(request):
     """
-    자동이체 출금동의 요청결과를 확인합니다.
+    자동이체 출금동의 서명상태를 확인합니다.
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
         clientCode = '020040000001'
 
         # 자동이체 출금동의 요청시 반환받은 접수아이디
-        receiptId = '020050711363200001'
+        receiptId = '020090912213500001'
 
-        response = kakaocertService.getCMSResult(clientCode, receiptId)
+        response = kakaocertService.getCMSState(clientCode, receiptId)
 
-        return render(request, 'getCMSResult.html', {'response': response})
+        return render(request, 'getCMSState.html', {'response': response})
+    except KakaocertException as KE:
+        return render(request, 'exception.html', {'code': KE.code, 'message': KE.message})
+
+def verifyCMShandler(request):
+    """
+    자동이체 출금동의 서명을 검증합니다.
+    """
+    try:
+        # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
+        clientCode = '020040000001'
+
+        # 자동이체 출금동의 요청시 반환받은 접수아이디
+        receiptId = '020090912213500001'
+
+        response = kakaocertService.verifyCMS(clientCode, receiptId)
+
+        return render(request, 'responseVerify.html', {'response': response})
     except KakaocertException as KE:
         return render(request, 'exception.html', {'code': KE.code, 'message': KE.message})
