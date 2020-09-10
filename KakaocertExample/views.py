@@ -78,7 +78,7 @@ def reqeustESignhandler(request):
 
 def getESignStatehandler(request):
     """
-    전자서명 서명상태를 확인합니다.
+    전자서명 요청시 반환된 접수아이디를 통해 서명 상태를 확인합니다.
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
@@ -96,7 +96,8 @@ def getESignStatehandler(request):
 
 def verifyESignhandler(request):
     """
-    전자서명 서명을 검증합니다.
+    전자서명 요청시 반환된 접수아이디를 통해 서명을 검증합니다.
+    - 서명검증시 전자서명 데이터 전문(signedData)이 반환됩니다.
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
@@ -105,8 +106,8 @@ def verifyESignhandler(request):
         # 전자서명 요청시 반환받은 접수아이디
         receiptId = '020090912183600001'
 
-        # AppToApp 인증시, 앱스킴 성공으로 반환받은 서명값
-        # TalkMessage 인증시 None 기재
+        # AppToApp 인증시, 앱스킴 성공처리시 반환되는 서명값(iOS-sig, Android-signature)
+        # Talk Message 인증시 None 기재
         signature = None
 
         response = kakaocertService.verifyESign(clientCode, receiptId, signature)
@@ -183,7 +184,7 @@ def reqeustVerifyAuthhandler(request):
 
 def getVerifyAuthStatehandler(request):
     """
-    본인인증 서명상태를 확인합니다.
+    본인인증 요청시 반환된 접수아이디를 통해 서명 상태를 확인합니다.
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
@@ -200,7 +201,9 @@ def getVerifyAuthStatehandler(request):
 
 def verifyAuthhandler(request):
     """
-    본인인증 서명을 검증합니다.
+    본인인증 요청시 반환된 접수아이디를 통해 본인인증 서명을 검증합니다.
+    - 서명검증시 전자서명 데이터 전문(signedData)이 반환됩니다.
+    - 본인인증 요청시 작성한 Token과 서명 검증시 반환되는 signedData의 동일여부를 확인하여 본인인증 검증을 완료합니다.
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
@@ -292,7 +295,7 @@ def reqeustCMShandler(request):
 
 def getCMSStatehandler(request):
     """
-    자동이체 출금동의 서명상태를 확인합니다.
+    자동이체 출금동의 요청시 반환된 접수아이디를 통해 서명 상태를 확인합니다.
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
@@ -309,7 +312,8 @@ def getCMSStatehandler(request):
 
 def verifyCMShandler(request):
     """
-    자동이체 출금동의 서명을 검증합니다.
+    자동이체 출금동의 요청시 반환된 접수아이디를 통해 서명을 검증합니다.
+    - 서명검증시 전자서명 데이터 전문(signedData)이 반환됩니다.
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
