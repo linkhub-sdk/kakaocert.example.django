@@ -11,6 +11,9 @@ kakaocertService = KakaocertService(settings.LinkID, settings.SecretKey)
 # 인증토큰 IP제한기능 사용여부, 권장(True)
 kakaocertService.IPRestrictOnOff = settings.IPRestrictOnOff
 
+# 카카오써트 API 서비스 고정 IP 사용여부, True-사용, False-미사용, 기본값(False)
+kakaocertService.UseStaticIP = settings.UseStaticIP
+
 def reqeustESignhandler(request):
     """
     전자서명을 요청합니다.
@@ -33,10 +36,10 @@ def reqeustESignhandler(request):
             ReceiverBirthDay = '19900108',
 
             # 수신자 휴대폰번호
-            ReceiverHP = '01043245117',
+            ReceiverHP = '01068444508',
 
             # 수신자 성명
-            ReceiverName = '정요한',
+            ReceiverName = '아무개',
 
             # 별칭코드, 이용기관이 생성한 별칭코드 (파트너 사이트에서 확인가능)
             # 카카오톡 인증메시지 중 "요청기관" 항목에 표시
@@ -242,13 +245,13 @@ def reqeustCMShandler(request):
             Expires_in = 60,
 
             # 수신자 생년월일, 형식 : YYYYMMDD
-            ReceiverBirthDay = '19900108',
+            ReceiverBirthDay = '19941219',
 
             # 수신자 휴대폰번호
-            ReceiverHP = '01043245117',
+            ReceiverHP = '01068444508',
 
             # 수신자 성명
-            ReceiverName = '정요한',
+            ReceiverName = '아무개',
 
             # 예금주명
             BankAccountName = '예금주명',

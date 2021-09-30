@@ -21,6 +21,8 @@ SecretKey = "SwWxqU+0TErBXy/9TVjIPEnI0VTUMMSQZtJf3Ed8q3I="
 # 인증토큰 IP제한기능 사용여부, 권장(True)
 IPRestrictOnOff = True
 
+# 카카오써트 API 서비스 고정 IP 사용여부, True-사용, False-미사용, 기본값(False)
+UseStaticIP = False
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -35,7 +37,7 @@ SECRET_KEY = '#(in=9bj3ixz$hm@ah^an4bw-y^y(q#0d+qy!=i8-b9cwei0w9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = '*'
 
 
 # Application definition
