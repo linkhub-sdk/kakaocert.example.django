@@ -1,2 +1,2 @@
-kakaocert==2.1.1
+kakaocert==2.50.0
 django==1.11.29
