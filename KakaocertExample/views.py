@@ -14,6 +14,9 @@ kakaocertService.IPRestrictOnOff = settings.IPRestrictOnOff
 # 카카오써트 API 서비스 고정 IP 사용여부, True-사용, False-미사용, 기본값(False)
 kakaocertService.UseStaticIP = settings.UseStaticIP
 
+# 로컬시스템 시간 사용여부 True-사용, False-미사용, 기본값(True)
+kakaocertService.UseLocalTimeYN = settings.UseLocalTimeYN
+
 def reqeustESignhandler(request):
     """
     전자서명을 요청합니다.
@@ -23,23 +26,30 @@ def reqeustESignhandler(request):
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
         clientCode = '020040000001'
 
+        # AppToApp 인증 여부
+        # True-App To App 방식, False-Talk Message 방식
+        appUseYN = False;
+
         # 전자서명 요청정보 객체
         requestObj = RequestESign(
 
             # 고객센터 전화번호, 카카오톡 인증메시지 중 "고객센터" 항목에 표시
             CallCenterNum = '1600-8536',
 
+            # 고객센터명, 카카오톡 인증메시지 중 "고객센터명" 항목에 표시
+            CallCenterName = '테스트',
+
             # 인증요청 만료시간(초), 최대값 1000, 인증요청 만료시간(초) 내에 미인증시 만료 상태로 처리됨
             Expires_in = 60,
 
             # 수신자 생년월일, 형식 : YYYYMMDD
-            ReceiverBirthDay = '19900108',
+            ReceiverBirthDay = '19941219',
 
             # 수신자 휴대폰번호
-            ReceiverHP = '01068444508',
+            ReceiverHP = '010111222',
 
             # 수신자 성명
-            ReceiverName = '아무개',
+            ReceiverName = '홍길동',
 
             # 별칭코드, 이용기관이 생성한 별칭코드 (파트너 사이트에서 확인가능)
             # 카카오톡 인증메시지 중 "요청기관" 항목에 표시
@@ -67,13 +77,11 @@ def reqeustESignhandler(request):
             Token = 'Token Value 2345',
 
             # PayLoad, 이용기관이 생성한 payload(메모) 값
-            PayLoad = 'Payload123',
+            PayLoad = 'Payload123'
 
-            # AppToApp 인증여부, true-AppToApp 인증, false-Talk Message 인증
-            isAppUseYN = False,
         )
 
-        result = kakaocertService.requestESign(clientCode, requestObj)
+        result = kakaocertService.requestESign(clientCode, requestObj, appUseYN)
 
         return render(request, 'response.html', {'receiptId': result.receiptId})
     except KakaocertException as KE:
@@ -88,7 +96,7 @@ def getESignStatehandler(request):
         clientCode = '020040000001'
 
         # 전자서명 요청시 반환받은 접수아이디
-        receiptId = '020090912183600001'
+        receiptId = '022042213311000001'
 
         response = kakaocertService.getESignState(clientCode, receiptId)
 
@@ -138,6 +146,9 @@ def reqeustVerifyAuthhandler(request):
             # 고객센터 전화번호, 카카오톡 인증메시지 중 "고객센터" 항목에 표시
             CallCenterNum = '1600-8536',
 
+            # 고객센터명, 카카오톡 인증메시지 중 "고객센터명" 항목에 표시
+            CallCenterName = '테스트',
+
             # 인증요청 만료시간(초), 최대값 1000, 인증요청 만료시간(초) 내에 미인증시 만료 상태로 처리됨
             Expires_in = 60,
 
@@ -145,10 +156,10 @@ def reqeustVerifyAuthhandler(request):
             ReceiverBirthDay = '19900108',
 
             # 수신자 휴대폰번호
-            ReceiverHP = '01043245117',
+            ReceiverHP = '010111222',
 
             # 수신자 성명
-            ReceiverName = '정요한',
+            ReceiverName = '홍길동',
 
             # 별칭코드, 이용기관이 생성한 별칭코드 (파트너 사이트에서 확인가능)
             # 카카오톡 인증메시지 중 "요청기관" 항목에 표시
@@ -235,11 +246,18 @@ def reqeustCMShandler(request):
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
         clientCode = '020040000001';
 
+        # AppToApp 인증 여부
+        # True-App To App 방식, False-Talk Message 방식
+        appUseYN = False;
+
         # 자동이체 출금동의 요청정보 객체
         requestObj = RequestCMS(
 
             # 고객센터 전화번호, 카카오톡 인증메시지 중 "고객센터" 항목에 표시
             CallCenterNum = '1600-8536',
+
+            # 고객센터명, 카카오톡 인증메시지 중 "고객센터명" 항목에 표시
+            CallCenterName = '테스트',
 
             # 인증요청 만료시간(초), 최대값 1000, 인증요청 만료시간(초) 내에 미인증시 만료 상태로 처리됨
             Expires_in = 60,
@@ -248,10 +266,10 @@ def reqeustCMShandler(request):
             ReceiverBirthDay = '19941219',
 
             # 수신자 휴대폰번호
-            ReceiverHP = '01068444508',
+            ReceiverHP = '010111222',
 
             # 수신자 성명
-            ReceiverName = '아무개',
+            ReceiverName = '홍길동',
 
             # 예금주명
             BankAccountName = '예금주명',
@@ -291,7 +309,7 @@ def reqeustCMShandler(request):
             PayLoad = 'Payload123'
         )
 
-        result = kakaocertService.requestCMS(clientCode, requestObj)
+        result = kakaocertService.requestCMS(clientCode, requestObj, appUseYN)
 
         return render(request, 'response.html', {'receiptId': result.receiptId})
     except KakaocertException as KE:
