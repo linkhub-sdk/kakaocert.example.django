@@ -81,9 +81,9 @@ def reqeustESignhandler(request):
 
         )
 
-        result = kakaocertService.requestESign(clientCode, requestObj, appUseYN)
+        response = kakaocertService.requestESign(clientCode, requestObj, appUseYN)
 
-        return render(request, 'response.html', {'receiptId': result.receiptId})
+        return render(request, 'responseESign.html', {'receiptId': response.receiptId, 'tx_id': response.tx_id})
     except KakaocertException as KE:
         return render(request, 'exception.html', {'code': KE.code, 'message': KE.message})
 
@@ -96,7 +96,7 @@ def getESignStatehandler(request):
         clientCode = '020040000001'
 
         # 전자서명 요청시 반환받은 접수아이디
-        receiptId = '022042213311000001'
+        receiptId = '022042511005100001'
 
         response = kakaocertService.getESignState(clientCode, receiptId)
 
@@ -309,9 +309,9 @@ def reqeustCMShandler(request):
             PayLoad = 'Payload123'
         )
 
-        result = kakaocertService.requestCMS(clientCode, requestObj, appUseYN)
+        response = kakaocertService.requestCMS(clientCode, requestObj, appUseYN)
 
-        return render(request, 'response.html', {'receiptId': result.receiptId})
+        return render(request, 'responseCMS.html', {'receiptId': response.receiptId, 'tx_id': response.tx_id})
     except KakaocertException as KE:
         return render(request, 'exception.html', {'code': KE.code, 'message': KE.message})
 

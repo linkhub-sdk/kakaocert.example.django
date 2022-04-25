@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block contents %}
+    <div id="content">
+        <p class="heading1">Kakaocert Django Example.</p>
+        <br/>
+        <fieldset class="fieldset1">
+            <legend>접수아이디</legend>
+            <ul>
+                <li>receiptId (접수아이디) : {{ receiptId }}</li>
+                <li>tx_id (카카오 트랜잭션아이디) : {{ tx_id }}</li>
+            </ul>
+        </fieldset>
+    </div>
+{% endblock contents %}
