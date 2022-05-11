@@ -43,7 +43,7 @@ def reqeustESignhandler(request):
             Expires_in = 60,
 
             # 수신자 생년월일, 형식 : YYYYMMDD
-            ReceiverBirthDay = '19941219',
+            ReceiverBirthDay = '19700101',
 
             # 수신자 휴대폰번호
             ReceiverHP = '010111222',
@@ -96,7 +96,7 @@ def getESignStatehandler(request):
         clientCode = '020040000001'
 
         # 전자서명 요청시 반환받은 접수아이디
-        receiptId = '022042511005100001'
+        receiptId = '022052511005100001'
 
         response = kakaocertService.getESignState(clientCode, receiptId)
 
@@ -116,7 +116,7 @@ def verifyESignhandler(request):
         clientCode = '020040000001'
 
         # 전자서명 요청시 반환받은 접수아이디
-        receiptId = '020090912183600001'
+        receiptId = '022050912183600001'
 
         # AppToApp 인증시, 앱스킴 성공처리시 반환되는 서명값(iOS-sig, Android-signature)
         # Talk Message 인증시 None 기재
@@ -153,7 +153,7 @@ def reqeustVerifyAuthhandler(request):
             Expires_in = 60,
 
             # 수신자 생년월일, 형식 : YYYYMMDD
-            ReceiverBirthDay = '19900108',
+            ReceiverBirthDay = '19700101',
 
             # 수신자 휴대폰번호
             ReceiverHP = '010111222',
@@ -206,7 +206,7 @@ def getVerifyAuthStatehandler(request):
         clientCode = '020040000001'
 
         # 본인인증 요청시 반환받은 접수아이디
-        receiptId = '020090912192100001'
+        receiptId = '022050912192100001'
 
         response = kakaocertService.getVerifyAuthState(clientCode, receiptId)
 
@@ -226,7 +226,7 @@ def verifyAuthhandler(request):
         clientCode = '020040000001'
 
         # 본인인증 요청시 반환받은 접수아이디
-        receiptId = '020090912192100001'
+        receiptId = '022050912192100001'
 
         response = kakaocertService.verifyAuth(clientCode, receiptId)
 
@@ -263,7 +263,7 @@ def reqeustCMShandler(request):
             Expires_in = 60,
 
             # 수신자 생년월일, 형식 : YYYYMMDD
-            ReceiverBirthDay = '19941219',
+            ReceiverBirthDay = '19700101',
 
             # 수신자 휴대폰번호
             ReceiverHP = '010111222',
@@ -277,7 +277,7 @@ def reqeustCMShandler(request):
             # 계좌번호, 이용기관은 사용자가 식별가능한 범위내에서 계좌번호의 일부를 마스킹 처리할 수 있음 (예시) 371-02-6***85
             BankAccountNum = '9-4324-5**7-58',
 
-            # 은행코드
+            # 참가기관 코드
             BankCode = '004',
 
             # 납부자번호, 이용기관에서 부여한 고객식별번호
@@ -325,7 +325,7 @@ def getCMSStatehandler(request):
         clientCode = '020040000001'
 
         # 자동이체 출금동의 요청시 반환받은 접수아이디
-        receiptId = '020090912213500001'
+        receiptId = '022050912213500001'
 
         response = kakaocertService.getCMSState(clientCode, receiptId)
 
@@ -344,7 +344,7 @@ def verifyCMShandler(request):
         clientCode = '020040000001'
 
         # 자동이체 출금동의 요청시 반환받은 접수아이디
-        receiptId = '020090912213500001'
+        receiptId = '022050912213500001'
 
         response = kakaocertService.verifyCMS(clientCode, receiptId)
 
