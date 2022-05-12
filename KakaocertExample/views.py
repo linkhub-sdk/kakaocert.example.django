@@ -346,7 +346,11 @@ def verifyCMShandler(request):
         # 자동이체 출금동의 요청시 반환받은 접수아이디
         receiptId = '022050912213500001'
 
-        response = kakaocertService.verifyCMS(clientCode, receiptId)
+        # AppToApp 인증시, 앱스킴 성공처리시 반환되는 서명값(iOS-sig, Android-signature)
+        # Talk Message 인증시 None 기재
+        signature = None
+
+        response = kakaocertService.verifyCMS(clientCode, receiptId, signature)
 
         return render(request, 'responseVerify.html', {'response': response})
     except KakaocertException as KE:
