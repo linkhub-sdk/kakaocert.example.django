@@ -20,6 +20,7 @@ kakaocertService.UseLocalTimeYN = settings.UseLocalTimeYN
 def reqeustESignhandler(request):
     """
     전자서명을 요청합니다.
+    - https://www.kakaocert.com/docs/ESign/API/python#RequestESign
     """
     try:
 
@@ -90,6 +91,7 @@ def reqeustESignhandler(request):
 def getESignStatehandler(request):
     """
     전자서명 요청시 반환된 접수아이디를 통해 서명 상태를 확인합니다.
+    - https://www.kakaocert.com/docs/ESign/API/python#GetESignState
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
@@ -110,6 +112,7 @@ def verifyESignhandler(request):
     전자서명 요청시 반환된 접수아이디를 통해 서명을 검증합니다.
     - 서명검증시 전자서명 데이터 전문(signedData)이 반환됩니다.
     - 카카오페이 서비스 운영정책에 따라 검증 API는 1회만 호출할 수 있습니다. 재시도시 오류처리됩니다.
+    - https://www.kakaocert.com/docs/ESign/API/python#VerifyESign
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
@@ -134,6 +137,7 @@ def reqeustVerifyAuthhandler(request):
     본인인증 전자서명을 요청합니다.
     - 본인인증 서비스에서 이용기관이 생성하는 Token은 사용자가 전자서명할 원문이 됩니다. 이는 보안을 위해 1회용으로 생성해야 합니다.
     - 사용자는 이용기관이 생성한 1회용 토큰을 서명하고, 이용기관은 그 서명값을 검증함으로써 사용자에 대한 인증의 역할을 수행하게 됩니다.
+    - https://www.kakaocert.com/docs/verifyAuth/API/python#RequestVerifyAuth
     """
     try:
 
@@ -200,6 +204,7 @@ def reqeustVerifyAuthhandler(request):
 def getVerifyAuthStatehandler(request):
     """
     본인인증 요청시 반환된 접수아이디를 통해 서명 상태를 확인합니다.
+    - https://www.kakaocert.com/docs/verifyAuth/API/python#GetVerifyAuthState
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
@@ -220,6 +225,7 @@ def verifyAuthhandler(request):
     - 서명검증시 전자서명 데이터 전문(signedData)이 반환됩니다.
     - 본인인증 요청시 작성한 Token과 서명 검증시 반환되는 signedData의 동일여부를 확인하여 본인인증 검증을 완료합니다.
     - 카카오페이 서비스 운영정책에 따라 검증 API는 1회만 호출할 수 있습니다. 재시도시 오류처리됩니다.
+    - https://www.kakaocert.com/docs/verifyAuth/API/python#F-VerifyAuth
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
@@ -240,6 +246,7 @@ def reqeustCMShandler(request):
     - 해당 서비스는 전자서명을 하는 당사자와 출금계좌의 예금주가 동일한 경우에만 사용이 가능합니다.
     - 전자서명 당사자와 출금계좌의 예금주가 동일인임을 체크하는 의무는 이용기관에 있습니다.
     - 금융결제원에 증빙자료(전자서명 데이터) 제출은 이용기관 측 에서 진행해야 합니다.
+    - https://www.kakaocert.com/docs/CMS/API/python#RequestCMS
     """
     try:
 
@@ -319,6 +326,7 @@ def reqeustCMShandler(request):
 def getCMSStatehandler(request):
     """
     자동이체 출금동의 요청시 반환된 접수아이디를 통해 서명 상태를 확인합니다.
+    - https://www.kakaocert.com/docs/CMS/API/python#GetCMSState
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
@@ -338,6 +346,7 @@ def verifyCMShandler(request):
     자동이체 출금동의 요청시 반환된 접수아이디를 통해 서명을 검증합니다.
     - 서명검증시 전자서명 데이터 전문(signedData)이 반환됩니다.
     - 카카오페이 서비스 운영정책에 따라 검증 API는 1회만 호출할 수 있습니다. 재시도시 오류처리됩니다.
+    - https://www.kakaocert.com/docs/CMS/API/python#VerifyCMS
     """
     try:
         # Kakaocert 이용기관코드, Kakaocert 파트너 사이트에서 확인
